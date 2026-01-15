@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/core/router/router_service.dart';
 import 'package:flutter_app/core/router/route_entry.dart';
 
-// -----------------------------
-// Router types: configuration and parser
-// -----------------------------
-
 /// Lightweight configuration - the whole app stack represented as list of locations.
 class AppRouteConfiguration {
   final List<String> locations;
@@ -29,7 +25,7 @@ class AppRouteInformationParser
   Future<AppRouteConfiguration> parseRouteInformation(
     RouteInformation routeInformation,
   ) async {
-    final location = routeInformation.location ?? '/';
+    final location = routeInformation.uri.path;
     // For simplicity: we treat the URL as the single stack root (replaceAll).
     // In more advanced use-cases you can parse multi-segment stacks like '/books/42/settings'.
     return AppRouteConfiguration([location]);
@@ -42,6 +38,6 @@ class AppRouteInformationParser
     final loc = configuration.locations.isNotEmpty
         ? configuration.locations.last
         : '/';
-    return RouteInformation(location: loc);
+    return RouteInformation(uri: Uri.parse(loc));
   }
 }

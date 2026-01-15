@@ -8,12 +8,16 @@ import 'package:flutter_app/core/router/router_service.dart';
 
 class RouterProvider extends InheritedWidget {
   final RouterService service;
-  const RouterProvider({required this.service, required super.child, super.key});
+  const RouterProvider({
+    required this.service,
+    required super.child,
+    super.key,
+  });
 
-  static RouterProvider? of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<RouterProvider>();
+  static RouterProvider? of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<RouterProvider>();
 
   @override
-  bool updateShouldNotify(covariant RouterProvider oldWidget) => service != oldWidget.service;
+  bool updateShouldNotify(covariant RouterProvider oldWidget) =>
+      service != oldWidget.service;
 }
-
-

@@ -18,8 +18,9 @@ class RouterService {
     final uri = Uri.parse(location);
     for (final def in registry) {
       final params = def.match(uri);
-      if (params != null)
+      if (params != null) {
         return RouteEntry(location: location, params: params, definition: def);
+      }
     }
 
     return RouteEntry(
@@ -44,7 +45,6 @@ class RouterService {
     stack.value = [_makeEntry(location)];
   }
 
-  /// Replace top entry (useful for redirecting)
   void replaceTop(String location) {
     if (stack.value.isEmpty) {
       stack.value = [_makeEntry(location)];

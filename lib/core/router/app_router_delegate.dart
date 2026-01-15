@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/core/router/router_service.dart';
 import 'package:flutter_app/core/router/router_parser.dart';
-import 'package:flutter_app/shared/not_found_page/presentation/not_found_screen.dart';
+import 'package:flutter_app/shared/not_found_screen/presentation/not_found_screen.dart';
 
-// -----------------------------
-// RouterDelegate
-// -----------------------------
 class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
     with
         ChangeNotifier,
@@ -38,7 +35,6 @@ class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
           ),
         );
       } else {
-        // Not found page
         pages.add(
           MaterialPage(
             key: ValueKey('/404'),
@@ -53,18 +49,14 @@ class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
     return Navigator(
       key: navigatorKey,
       pages: pages,
-      onPopPage: (route, result) {
-        final didPop = route.didPop(result);
-        if (!didPop) return false;
+      onDidRemovePage: (page) {
         routerService.pop();
-        return true;
-      },
+      }
     );
   }
 
   @override
   Future<void> setNewRoutePath(AppRouteConfiguration configuration) async {
-    // When the OS/browser requests a new URL, replace the stack with that URL
     final newTop = configuration.locations.isNotEmpty
         ? configuration.locations.last
         : '/';
