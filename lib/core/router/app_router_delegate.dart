@@ -51,7 +51,7 @@ class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
       pages: pages,
       onDidRemovePage: (page) {
         routerService.pop();
-      }
+      },
     );
   }
 

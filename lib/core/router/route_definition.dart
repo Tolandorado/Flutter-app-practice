@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 typedef PageBuilder =
     Widget Function(BuildContext context, Map<String, String>? params);
 
-// -----------------------------
-// Small, focused domain models
-// -----------------------------
-
 /// Represents a registered route pattern and a page builder.
 /// Example pattern: '/books/:id' or '/settings'
 class RouteDefinition {
@@ -47,7 +43,6 @@ class RouteDefinition {
       params[_paramNames[i]] = Uri.decodeComponent(m.group(i + 1) ?? '');
     }
 
-    // also include query params
     params.addAll(uri.queryParameters);
     return params;
   }
